@@ -514,7 +514,7 @@ class ViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDeleg
                 println("Save canceled")
                 
             case 1: //Save
-                let filename = (alertView.textFieldAtIndex(0)?.text.utf16Count == 0) ? " " : alertView.textFieldAtIndex(0)?.text
+                let filename = (count(alertView.textFieldAtIndex(0)?.text.utf16) == 0) ? " " : alertView.textFieldAtIndex(0)?.text
                 println("Save File \(filename)")
                 //export to a file
                 let gpxString = self.map.exportToGPXString()
@@ -625,8 +625,8 @@ class ViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDeleg
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
         println("calloutAccesoryControlTapped ")
-        let waypoint = view.annotation as GPXWaypoint
-        let button = control as UIButton
+        let waypoint = view.annotation as! GPXWaypoint
+        let button = control as! UIButton
         switch button.tag {
         case kDeleteWaypointAccesoryButtonTag:
             println("[calloutAccesoryControlTapped: DELETE button] deleting waypoint with name \(waypoint.name)");
@@ -651,7 +651,7 @@ class ViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDeleg
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
         if (newState == MKAnnotationViewDragState.Ending){
-            let point = view.annotation as GPXWaypoint
+            let point = view.annotation as! GPXWaypoint
             println("Annotation name: \(point.title) lat:\(point.latitude) lon \(point.longitude)")
         }
     }
@@ -662,7 +662,7 @@ class ViewController: UIViewController, MKMapViewDelegate,CLLocationManagerDeleg
         var i = 0
         for object in views {
             i++
-            let aV = object as MKAnnotationView
+            let aV = object as! MKAnnotationView
             if aV.annotation.isKindOfClass(MKUserLocation) { continue }
             
             let point : MKMapPoint = MKMapPointForCoordinate(aV.annotation.coordinate)

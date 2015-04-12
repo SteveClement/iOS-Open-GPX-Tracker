@@ -53,7 +53,7 @@ class GPXFilesTableViewController : UITableViewController, UINavigationBarDelega
         let list: NSArray = GPXFileManager.fileList
         if list.count != 0 {
             self.fileList.removeAllObjects()
-            self.fileList.addObjectsFromArray(list)
+            self.fileList.addObjectsFromArray(list as [AnyObject])
         }
     }
     
@@ -105,7 +105,7 @@ class GPXFilesTableViewController : UITableViewController, UINavigationBarDelega
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Value1, reuseIdentifier: "Cell")
         //cell.accessoryType = UITableViewCellAccessoryType.DetailDisclosureButton
         //cell.accessoryView = [[ UIImageView alloc ] initWithImage:[UIImage imageNamed:@"Something" ]];
-        cell.textLabel?.text = fileList.objectAtIndex(indexPath.row) as NSString
+        cell.textLabel?.text = fileList.objectAtIndex(indexPath.row) as! NSString as String
         return cell
     }
     
@@ -154,7 +154,7 @@ class GPXFilesTableViewController : UITableViewController, UINavigationBarDelega
     
     func actionDeleteFileAtIndex(rowIndex: Int) {
         //Delete File
-        let filename: String = fileList.objectAtIndex(rowIndex) as String
+        let filename: String = fileList.objectAtIndex(rowIndex) as! String
         GPXFileManager.removeFile(filename)
         //Delete from list and Table
         fileList.removeObjectAtIndex(rowIndex)
@@ -164,7 +164,7 @@ class GPXFilesTableViewController : UITableViewController, UINavigationBarDelega
     }
     
     func actionLoadFileAtIndex(rowIndex: Int) {
-        let filename: String = fileList.objectAtIndex(rowIndex) as String
+        let filename: String = fileList.objectAtIndex(rowIndex) as! String
         println("load gpx File: \(filename)")
         let gpx = GPXParser.parseGPXAtPath(GPXFileManager.pathForFilename(filename))
         self.delegate?.didLoadGPXFileWithName(filename.stringByDeletingPathExtension, gpxRoot: gpx)
@@ -173,7 +173,7 @@ class GPXFilesTableViewController : UITableViewController, UINavigationBarDelega
     
     //#pragma mark - Send email
     func actionSendEmailWithAttachment(rowIndex: Int) {
-        let filename: String = fileList.objectAtIndex(rowIndex) as String
+        let filename: String = fileList.objectAtIndex(rowIndex) as! String
         let filepath: String = GPXFileManager.pathForFilename(filename)
         
         let composer = MFMailComposeViewController()

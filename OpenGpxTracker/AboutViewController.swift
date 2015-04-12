@@ -47,7 +47,8 @@ class AboutViewController : UIViewController, UIWebViewDelegate {
         println("shouldStartLoadWithRequest")
         
         if navigationType == UIWebViewNavigationType.LinkClicked {
-            UIApplication.sharedApplication().openURL(request.URL)
+            // ? or !
+            UIApplication.sharedApplication().openURL(request.URL!)
             return false
         }
         return true

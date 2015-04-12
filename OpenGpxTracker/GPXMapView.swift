@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import UiKit
+import UIKit
 import MapKit
 
 //GPX creator identifier
@@ -164,17 +164,17 @@ class GPXMapView : MKMapView {
         self.clearMap()
         
         //add waypoints
-        self.waypoints = gpx.waypoints as [GPXWaypoint]
+        self.waypoints = gpx.waypoints as! [GPXWaypoint]
         var pt: GPXWaypoint
         for pt in self.waypoints {
             self.addWaypoint(pt)
         }
         //add track segments
-        self.tracks = gpx.tracks as [GPXTrack]
+        self.tracks = gpx.tracks as! [GPXTrack]
         for oneTrack in self.tracks {
             for segment in oneTrack.tracksegments {
                 self.addOverlay(segment.overlay)
-                let segmentTrackpoints = segment.trackpoints as [GPXTrackPoint]
+                let segmentTrackpoints = segment.trackpoints as! [GPXTrackPoint]
                 //add point to map extent
                 for waypoint in segmentTrackpoints {
                     self.extent.extendAreaToIncludeLocation(waypoint.coordinate)

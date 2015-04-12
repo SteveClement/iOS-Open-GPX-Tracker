@@ -19,7 +19,7 @@ class GPXFileManager : NSObject {
     
     class var gpxFilesFolder: String {
         get {
-            let documentsDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+            let documentsDirectory = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as! String
             return documentsDirectory
         }
     }
@@ -33,7 +33,7 @@ class GPXFileManager : NSObject {
             
             //We want latest files created on top. It seems we have to reverse the path
             filePathsArray = filePathsArray.reverseObjectEnumerator().allObjects
-            return filePathsArray
+            return filePathsArray as [AnyObject]
         }
     }
     //
